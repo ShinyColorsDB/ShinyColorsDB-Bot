@@ -90,11 +90,12 @@ client.on('message', async (msg) => {
                         msg.reply(embed);
                     }
                     else if (result?.length == 1) {
-                        const picUrl = result[0].CardType.match(/P_/) ? result[0].BigPic2 : result[0].BigPic1;
-                        console.log(picUrl);
+                        const type = result[0].CardType.match(/P_/) ? "P" : "S";
+                        const picUrl = type == "P" ? result[0].BigPic2 : result[0].BigPic1;
                         const embed = new Discord.MessageEmbed()
                             .setColor(result[0].Color1)
                             .setTitle(result[0].CardName)
+                            .setURL(`https://shinycolors.moe/info/${type}CardInfo?UUID=${result[0].CardUUID}`)
                             .setImage('https://static.shinycolors.moe/pictures/bigPic/' + picUrl)
                             .setThumbnail('https://static.shinycolors.moe/pictures/smlPic/' + result[0].SmallPic)
                             .setTimestamp()
