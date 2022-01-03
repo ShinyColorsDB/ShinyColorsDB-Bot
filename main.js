@@ -69,7 +69,7 @@ client.on('message', async (msg) => {
                 type = args?.t ? args.t : ".*";
 
             conn.execute(
-                'SELECT a.*, b.Color1 FROM `3-IdolCards` as a, `1-Idols` as b WHERE b.IdolName REGEXP ? AND b.IdolID = a.IdolID AND a.CardName REGEXP ? AND a.CardType REGEXP ? ORDER BY FIELD(CardType, "P_SSR", "P_SR", "P_R", "S_SSR", "S_SR", "S_R", "S_N")',
+                'SELECT a.*, b.Color1 FROM `SCDB_CardList` as a, `SCDB_Idols` as b WHERE b.IdolName REGEXP ? AND b.IdolID = a.IdolID AND a.CardName REGEXP ? AND a.CardType REGEXP ? ORDER BY FIELD(CardType, "P_SSR", "P_SR", "P_R", "S_SSR", "S_SR", "S_R", "S_N")',
                 [idol, card, type],
                 (err, result) => {
                     if (!result?.length) {
@@ -114,7 +114,7 @@ client.on('message', async (msg) => {
             }
 
             conn.execute(
-                'SELECT a.*, b.UnitName FROM `1-Idols` AS a, `2-Units` AS b WHERE `IdolName` REGEXP ? AND a.Unit = b.UnitID',
+                'SELECT a.*, b.UnitName FROM `SCDB_Idols` AS a, `SCDB_Units` AS b WHERE `IdolName` REGEXP ? AND a.Unit = b.UnitID',
                 [args.n],
                 (err, result) => {
 
