@@ -96,8 +96,8 @@ client.on('message', async (msg) => {
                             .setColor(result[0].Color1)
                             .setTitle(result[0].CardName)
                             .setURL(`https://shinycolors.moe/info/${type}CardInfo?UUID=${result[0].CardUUID}`)
-                            .setImage('https://static.shinycolors.moe/pictures/bigPic/' + picUrl)
-                            .setThumbnail('https://static.shinycolors.moe/pictures/smlPic/' + result[0].SmallPic)
+                            .setImage('https://static.shinycolors.moe/pictures/bigPic/' + picUrl + ".jpg")
+                            .setThumbnail('https://static.shinycolors.moe/pictures/smlPic/' + result[0].SmallPic + ".png")
                             .setTimestamp()
                             .setFooter("Project ShinyColorsDB");
 
