@@ -12,7 +12,7 @@ class Sync(commands.Cog):
             return
 
         fmt = await ctx.bot.tree.sync()
-        await ctx.send(f"Syncd {len(fmt)} commands to current guild")
+        await ctx.send(f"Syncd {len(fmt)} commands to all guild")
 
 async def setup(bot):
     await bot.add_cog(Sync(bot))

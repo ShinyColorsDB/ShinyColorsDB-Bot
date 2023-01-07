@@ -18,7 +18,7 @@ class CardInfo(commands.Cog):
         current: str
     ) -> list[app_commands.Choice[str]]:
         return [app_commands.Choice(name=card.card_name, value=card.card_name)
-                       for card in ScdbCardList.select().where(ScdbCardList.card_name.contains(current)).limit(25)]
+                       for card in ScdbCardList.select().where(ScdbCardList.card_name.contains(current)).order_by(ScdbCardList.enza_id.asc()).limit(25)]
 
     @app_commands.command(name="cardinfo", description="查詢卡片資料")
     @app_commands.describe(cardname="卡片名稱")
