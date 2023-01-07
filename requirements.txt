@@ -1,0 +1,4 @@
+peewee==3.15.3
+python-dotenv==0.21.0
+discord.py==2.1.0
+PyMySQL==1.0.2
