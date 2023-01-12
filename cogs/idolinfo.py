@@ -25,8 +25,11 @@ class IdolInfo(commands.Cog):
     @app_commands.autocomplete(idols=idolinfo_autocomplete)
     async def idolinfo(self, interaction: discord.Interaction, idols: str):
         await interaction.response.defer()
-        thisIdol = ScdbIdols.get(ScdbIdols.idol_name == idols)
+        thisIdol = ScdbIdols.get_or_none(ScdbIdols.idol_name == idols)
         try:
+            if thisIdol == None:
+                await interaction.followup.send("<:ml_serikapout:663075600503930880>")
+
             embed = discord.Embed(
                 title=thisIdol.idol_name,
                 url=f"https://shinycolors.moe/idolinfo?idolid={thisIdol.idol_id}",
@@ -44,12 +47,13 @@ class IdolInfo(commands.Cog):
             embed.add_field(name="血型", value=thisIdol.blood_type)
             embed.add_field(name="趣味", value=thisIdol.interest, inline=False)
             embed.add_field(name="特技", value=thisIdol.special_skill, inline=False)
-            embed.add_field(name="CV", value=thisIdol.cv, inline=False)
+            embed.add_field(name="CV", value=(
+                thisIdol.cv if thisIdol.pre_cv is None else f"{thisIdol.pre_cv} → {thisIdol.cv}"), inline=False)
             embed.set_image(
                 url=f'https://static.shinycolors.moe/pictures/icon/{str(thisIdol.idol_id).zfill(2)}.jpg')
+            await interaction.followup.send(embed=embed)
         except Exception as e:
             print(e)
-        await interaction.followup.send(embed=embed)
 
 
 async def setup(bot):
