@@ -5,14 +5,16 @@ from multiprocessing import cpu_count as cpuCount
 
 import os
 
+db = PooledMySQLDatabase(os.environ.get('DATABASE'), max_connections=3*cpuCount(), **{
+    'charset': 'utf8', 'sql_mode': 'PIPES_AS_CONCAT', 'use_unicode': True, 'host': os.environ.get('SERVER'), 'user': os.environ.get('USERNAME'), 'password': os.environ.get('PASSWORD')})
+
 class UnknownField(object):
     def __init__(self, *_, **__): pass
 
 
 class BaseModel(Model):
     class Meta:
-        database = PooledMySQLDatabase(os.environ.get('DATABASE'), max_connections=3*cpuCount(), **{
-                                       'charset': 'utf8', 'sql_mode': 'PIPES_AS_CONCAT', 'use_unicode': True, 'host': os.environ.get('SERVER'), 'user': os.environ.get('USERNAME'), 'password': os.environ.get('PASSWORD')})
+        database = db
         model_metadata_class = ThreadSafeDatabaseMetadata
         print("Database connected")
 

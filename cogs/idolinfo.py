@@ -18,7 +18,7 @@ class IdolInfo(commands.Cog):
         current: str
     ) -> list[app_commands.Choice[str]]:
         return [app_commands.Choice(name=idol.idol_name, value=idol.idol_name)
-            for idol in ScdbIdols.select().where((ScdbIdols.idol_name.contains(current)) & (ScdbIdols.idol_id != 0) & (ScdbIdols.idol_id != 26)).limit(25)]
+            for idol in ScdbIdols.select().where((ScdbIdols.idol_name.contains(current)) & (ScdbIdols.idol_id != 0)).limit(25)]
 
     @app_commands.command(name="idolinfo", description="查詢偶像資料")
     @app_commands.describe(idols="偶像名稱")
@@ -29,6 +29,7 @@ class IdolInfo(commands.Cog):
         try:
             if thisIdol == None:
                 await interaction.followup.send("<:ml_serikapout:663075600503930880>")
+                return
 
             embed = discord.Embed(
                 title=thisIdol.idol_name,

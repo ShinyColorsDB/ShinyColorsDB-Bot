@@ -26,30 +26,42 @@ class CardInfo(commands.Cog):
     async def cardinfo(self, interaction: discord.Interaction, cardname: str):
         await interaction.response.defer()
         thisCard = ScdbCardList.get(ScdbCardList.card_name == cardname)
+        await interaction.followup.send(embed=createEmbed(thisCard))
 
-        try:
-            ps = "p" if "P_" in thisCard.card_type else "s"
-            embed = discord.Embed(
-                title=thisCard.card_name,
-                color=discord.Colour.from_str(thisCard.idol.color1),
-                url=f"https://shinycolors.moe/{ps}cardinfo?uuid={thisCard.card_uuid}"
-            )
-            if "P_" in thisCard.card_type:
-                embed.set_image(
-                    url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic2}.jpg")
-            else:
-                embed.set_image(
-                    url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic1}.jpg")
-            embed.set_thumbnail(
-                url=f"https://static.shinycolors.moe/pictures/smlPic/{thisCard.sml_pic}.png")
-            embed.add_field(name="類別", value=thisCard.card_type)
-            embed.add_field(name="取得方式", value=thisCard.get_method)
-            embed.add_field(name="實裝日期", value=thisCard.release_date)
+    @app_commands.command(name="newcardinfo", description="查詢新卡資料")
+    async def newcardinfo(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+        newiest = ScdbCardList.select().order_by(ScdbCardList.release_date.desc()).get()
+        rows = ScdbCardList.select().where(
+            ScdbCardList.release_date == newiest.release_date)
+        for i in rows:
+            await interaction.followup.send(embed=createEmbed(i))
 
-        except Exception as e:
-            print(e)
+def createEmbed(thisCard) -> discord.Embed:
+    try:
+        ps = "p" if "P_" in thisCard.card_type else "s"
+        embed = discord.Embed(
+            title=thisCard.card_name,
+            color=discord.Colour.from_str(thisCard.idol.color1),
+            url=f"https://shinycolors.moe/{ps}cardinfo?uuid={thisCard.card_uuid}"
+        )
 
-        await interaction.followup.send(embed=embed)
+        if "P_" in thisCard.card_type:
+            embed.set_image(
+                url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic2}.jpg")
+        else:
+            embed.set_image(
+                url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic1}.jpg")
+
+        embed.set_thumbnail(
+            url=f"https://static.shinycolors.moe/pictures/smlPic/{thisCard.sml_pic}.png")
+        embed.add_field(name="類別", value=thisCard.card_type)
+        embed.add_field(name="取得方式", value=thisCard.get_method)
+        embed.add_field(name="實裝日期", value=thisCard.release_date)
+    except Exception as e:
+        print(e)
+
+    return embed
 
 async def setup(bot):
     await bot.add_cog(CardInfo(bot))
