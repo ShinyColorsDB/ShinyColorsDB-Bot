@@ -25,7 +25,7 @@ class IdolInfo(commands.Cog):
     @app_commands.autocomplete(idols=idolinfo_autocomplete)
     async def idolinfo(self, interaction: discord.Interaction, idols: str):
         await interaction.response.defer()
-        thisIdol = ScdbIdols.get_or_none(ScdbIdols.idol_name == idols)
+        thisIdol: ScdbIdols = ScdbIdols.get_or_none(ScdbIdols.idol_name == idols)
         try:
             if thisIdol == None:
                 await interaction.followup.send("<:ml_serikapout:663075600503930880>")

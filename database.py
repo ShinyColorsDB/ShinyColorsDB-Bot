@@ -90,3 +90,16 @@ class ScdbCardList(BaseModel):
 
     class Meta:
         table_name = 'SCDB_CardList'
+
+class ScdbSeiyuu(BaseModel):
+    seiyuu_index = AutoField(column_name='SeiyuuIndex')
+    seiyuu_name = TextField(column_name='SeiyuuName')
+    seiyuu_photo = TextField(column_name='SeiyuuPhoto')
+    seiyuu_birth_year = TextField(column_name='SeiyuuBirthYear', null=True)
+    seiyuu_birth_date = TextField(column_name='SeiyuuBirthDate', null=True)
+    belonging_firm = TextField(column_name='BelongingFirm')
+    seiyuu_twitter = TextField(column_name='SeiyuuTwitter', null=True)
+    seiyuu_chokume = TextField(column_name='SeiyuuChokume', null=True)
+
+    class Meta:
+        table_name = 'SCDB_Seiyuu'
