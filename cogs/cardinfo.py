@@ -48,13 +48,15 @@ def createEmbed(thisCard) -> discord.Embed:
 
         if "P_" in thisCard.card_type:
             embed.set_image(
-                url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic2}.jpg")
+                url=f"https://viewer.shinycolors.moe/images/content/idols/fes_card/{thisCard.enza_id}.jpg")
+            embed.set_thumbnail(
+                url=f"https://viewer.shinycolors.moe/images/content/idols/icon/{thisCard.enza_id}.png")
         else:
             embed.set_image(
-                url=f"https://static.shinycolors.moe/pictures/bigPic/{thisCard.big_pic1}.jpg")
+                url=f"https://viewer.shinycolors.moe/images/content/support_idols/card/{thisCard.enza_id}.jpg")
+            embed.set_thumbnail(
+                url=f"https://viewer.shinycolors.moe/images/content/support_idols/icon/{thisCard.enza_id}.png")
 
-        embed.set_thumbnail(
-            url=f"https://static.shinycolors.moe/pictures/smlPic/{thisCard.sml_pic}.png")
         embed.add_field(name="類別", value=thisCard.card_type)
         embed.add_field(name="取得方式", value=thisCard.get_method)
         embed.add_field(name="實裝日期", value=thisCard.release_date)

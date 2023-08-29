@@ -25,7 +25,7 @@ class Birthday(commands.Cog):
             for cId in os.environ.get("NOTIFY").split(","):
                 channel = self.bot.get_channel(int(cId))
                 if idol.idol_id == 18:
-                    await channel.send("私、" + idol.idol_name + "の誕生日です！\nもっともっと みんなに楽しい気持ちを届けられるよう 頑張ります！")
+                    await channel.send("私、" + idol.idol_name + "の誕生日です！\nわあ～♡このプレゼント、すっごく可愛いです～♡")
                 else:
                     await channel.send(idol.idol_name + "の誕生日です！")
 
