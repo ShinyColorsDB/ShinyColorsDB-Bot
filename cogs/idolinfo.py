@@ -51,7 +51,7 @@ class IdolInfo(commands.Cog):
             embed.add_field(name="CV", value=(
                 thisIdol.cv if thisIdol.pre_cv is None else f"{thisIdol.pre_cv} → {thisIdol.cv}"), inline=False)
             embed.set_image(
-                url=f'https://static.shinycolors.moe/pictures/icon/{str(thisIdol.idol_id).zfill(2)}.jpg')
+                url=f'https://cf-static.shinycolors.moe/others/idolIcon/{str(thisIdol.idol_id).zfill(3)}.jpg')
             await interaction.followup.send(embed=embed)
         except Exception as e:
             print(e)

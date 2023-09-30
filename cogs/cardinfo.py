@@ -48,14 +48,14 @@ def createEmbed(thisCard) -> discord.Embed:
 
         if "P_" in thisCard.card_type:
             embed.set_image(
-                url=f"https://viewer.shinycolors.moe/images/content/idols/fes_card/{thisCard.enza_id}.jpg")
+                url=f"https://cf-static.shinycolors.moe/images/content/idols/fes_card/{thisCard.enza_id}.jpg")
             embed.set_thumbnail(
-                url=f"https://viewer.shinycolors.moe/images/content/idols/icon/{thisCard.enza_id}.png")
+                url=f"https://cf-static.shinycolors.moe/images/content/idols/icon/{thisCard.enza_id}.png")
         else:
             embed.set_image(
-                url=f"https://viewer.shinycolors.moe/images/content/support_idols/card/{thisCard.enza_id}.jpg")
+                url=f"https://cf-static.shinycolors.moe/images/content/support_idols/card/{thisCard.enza_id}.jpg")
             embed.set_thumbnail(
-                url=f"https://viewer.shinycolors.moe/images/content/support_idols/icon/{thisCard.enza_id}.png")
+                url=f"https://cf-static.shinycolors.moe/images/content/support_idols/icon/{thisCard.enza_id}.png")
 
         embed.add_field(name="類別", value=thisCard.card_type)
         embed.add_field(name="取得方式", value=thisCard.get_method)
