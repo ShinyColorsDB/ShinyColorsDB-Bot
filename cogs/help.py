@@ -11,6 +11,7 @@ class Help(commands.Cog):
         print("Loaded cog 'help'")
 
     @app_commands.command(name="help", description="使用指南")
+    @app_commands.allowed_installs(users=True, guilds=True)
     async def help(self, interaction: discord.Interaction):
         await interaction.response.defer()
 

@@ -23,12 +23,14 @@ class CardInfo(commands.Cog):
     @app_commands.command(name="cardinfo", description="查詢卡片資料")
     @app_commands.describe(cardname="卡片名稱")
     @app_commands.autocomplete(cardname=cardinfo_autocomplete)
+    @app_commands.allowed_installs(users=True, guilds=True)
     async def cardinfo(self, interaction: discord.Interaction, cardname: str):
         await interaction.response.defer()
         thisCard = ScdbCardList.get(ScdbCardList.card_name == cardname)
         await interaction.followup.send(embed=createEmbed(thisCard))
 
     @app_commands.command(name="newcardinfo", description="查詢新卡資料")
+    @app_commands.allowed_installs(users=True, guilds=True)
     async def newcardinfo(self, interaction: discord.Interaction):
         await interaction.response.defer()
         newiest = ScdbCardList.select().order_by(ScdbCardList.release_date.desc()).get()

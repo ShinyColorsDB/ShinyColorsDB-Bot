@@ -24,6 +24,7 @@ class SeiyuuInfo(commands.Cog):
     @app_commands.command(name="seiyuuinfo", description="查詢聲優資料")
     @app_commands.describe(seiyuu="聲優姓名")
     @app_commands.autocomplete(seiyuu=seiyuuinfo_autocomplete)
+    @app_commands.allowed_installs(users=True, guilds=True)
     async def idolinfo(self, interaction: discord.Interaction, seiyuu: str):
         await interaction.response.defer()
         thisSeiyuu: ScdbSeiyuu = ScdbSeiyuu.get_or_none(

@@ -12,6 +12,7 @@ class Pout(commands.Cog):
 
     @app_commands.command(name="pout", description="星梨花不爽")
     @app_commands.describe(count="重複數量")
+    @app_commands.allowed_installs(users=True, guilds=True)
     async def pout(self, interaction: discord.Interaction, count: int = 1):
         await interaction.response.defer()
         pouts = "<:ml_serikapout:663075600503930880>"

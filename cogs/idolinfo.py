@@ -21,6 +21,7 @@ class IdolInfo(commands.Cog):
             for idol in ScdbIdols.select().where((ScdbIdols.idol_name.contains(current)) & (ScdbIdols.idol_id != 0)).limit(25)]
 
     @app_commands.command(name="idolinfo", description="查詢偶像資料")
+    @app_commands.allowed_installs(users=True, guilds=True)
     @app_commands.describe(idols="偶像名稱")
     @app_commands.autocomplete(idols=idolinfo_autocomplete)
     async def idolinfo(self, interaction: discord.Interaction, idols: str):
